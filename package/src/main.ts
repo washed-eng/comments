@@ -1,9 +1,8 @@
 import "./style.css";
 import typescriptLogo from "./typescript.svg";
 import viteLogo from "/vite.svg";
-import { setupCounter } from "./counter.ts";
-import { getAllComments } from "./api.ts";
 import { createCommentButton } from "./lib/create-comment-button.ts";
+import { getAllComments } from "./api/comments/index.ts";
 
 const comments = await getAllComments();
 for (const comment of comments) {
@@ -33,7 +32,6 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
 window.addEventListener("mousedown", (e) => {
   createCommentButton({ x: e.pageX, y: e.pageY });
 });
