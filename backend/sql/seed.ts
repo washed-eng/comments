@@ -1,4 +1,5 @@
 import { sql } from "bun";
+// import { readdir } from "node:fs/promises";
 
 export const seed = async () => {
   await sql`CREATE TABLE IF NOT EXISTS urls (
@@ -26,4 +27,9 @@ export const seed = async () => {
           resolved BOOLEAN
       )
    `;
+
+  // const migrations = await readdir(import.meta.dir + "/migrations");
+  // for (const migration of migrations) {
+  //   await sql.file(import.meta.dir + "/migrations/" + migration);
+  // }
 };

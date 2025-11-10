@@ -10,7 +10,7 @@ const app = new Hono();
 app.use(
   "*", // or replace with "*" to enable cors for all routes
   cors({
-    origin: process.env.FRONTEND_URL!, // replace with your origin
+    origin: "*", // replace with your origin
     allowHeaders: ["Content-Type", "Authorization"],
     allowMethods: ["POST", "GET", "OPTIONS"],
     exposeHeaders: ["Content-Length"],
@@ -25,8 +25,8 @@ app.post("/api/comment/create", async (c) => {
   const comment = await c.req.json();
 
   const [row] = await sql`
-    INSERT INTO comment (url, cordinates, description, resolved)
-    VALUES (${comment.url}, ${comment.cordinates}, ${comment.description}, ${comment.resolved})
+    INSERT INTO comment (url, cordinates, description, resolved, x_cordinate, y_cordinate)
+    VALUES (${comment.url}, ${comment.cordinates}, ${comment.description}, ${comment.resolved}, ${comment.x_cordinate}, ${comment.y_cordinate})
     RETURNING *`;
 
   if (row) {
